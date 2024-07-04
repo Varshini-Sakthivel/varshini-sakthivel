@@ -1,0 +1,24 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+     int start=image[sr][sc];
+     int row=image.length;
+     int col=image[0].length;
+     if(start!=color)
+     function(image,sr,sc,row,col,color,start);
+     return image;
+
+    }
+    public void function(int [][]image,int sr,int sc,int row,int col,int color,int start){
+    if(sr<0 || sr>=row || sc<0 || sc>=col)
+      return ;
+
+    if(image[sr][sc]!=start)
+      return;
+    image[sr][sc]=color;
+    function(image,sr-1,sc,row,col,color,start);
+    function(image,sr+1,sc,row,col,color,start);
+    function(image,sr,sc+1,row,col,color,start);
+    function(image,sr,sc-1,row,col,color,start);
+    return;
+        }
+}
