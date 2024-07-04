@@ -1,0 +1,25 @@
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        int xor=0;
+        for(int i=0;i<nums.length;i++){
+            xor=xor^nums[i];
+        }
+        int a=1;
+        int count=0;
+        while((xor & 1) !=1){
+            count++;
+            xor=xor>>1;
+        }
+        int first=0;
+        int second=0;
+        for(int i=0;i<nums.length;i++){
+            if(((nums[i]>>count)&1)==1){
+                first=first ^ nums[i];
+            }
+            else{
+                second^=nums[i];
+            }
+        }
+        return new int[]{first,second};
+    }
+}
