@@ -1,0 +1,17 @@
+class Solution {
+    public int maxCoins(int[] piles) {
+        int n=piles.length;
+        Arrays.sort(piles);
+        int count=0;
+        int dup=(n/3);
+        int flag=0;
+        
+     for(int i=piles.length-2;i>=0;i=i-2){
+                if(flag==dup)
+                   break;
+                flag++;   
+                count=count+piles[i];
+             }
+             return count;
+     }  
+    }
