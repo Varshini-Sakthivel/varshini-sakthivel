@@ -1,0 +1,27 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue <Integer> dq=new LinkedList <>();
+        Stack <Integer> st=new Stack<>();
+        for(int i=0;i<students.length;i++){
+              dq.add(students[i]);
+        }
+        for(int i=sandwiches.length-1;i>=0;i--){
+            st.push(sandwiches[i]);
+        }
+        int k=0;
+        while(!dq.isEmpty() && k<dq.size()){
+          if(dq.peek()==st.peek()){
+            dq.remove();
+            st.pop();
+            k=0;
+          }
+          else{
+            int a=dq.remove();
+            dq.add(a);
+            k++;
+          }
+        
+    }
+    return dq.size();
+}
+}
