@@ -1,0 +1,55 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int totsum = 0;
+        int tolele=nums.length;
+		for (int i = 0; i < tolele; i++) {
+			totsum = totsum + nums[i];
+		}
+		if (totsum % 2 != 0) {
+			return false;
+            
+		}
+		int sum = totsum / 2;
+		int dparr[][] = new int[tolele + 1][sum + 1];
+		for (int i = 0; i < tolele + 1; i++) {
+			for (int j = 0; j < sum + 1; j++) {
+				dparr[i][j] = -1;
+			}
+        }
+		boolean answer = partsubset(nums, tolele, sum, dparr);
+		return (answer);
+	}
+
+	static boolean partsubset(int[] nums, int tolele, int sum, int[][]dparr)   {
+	    if (sum == 0)
+			return true;
+		if (tolele <= 0)
+			return false;
+		if (dparr[tolele][sum] != -1) {
+			if (dparr[tolele][sum] == 1)
+				return true;
+			else
+				return false;
+		}
+		if (nums[tolele - 1] > sum) {
+			boolean ans = partsubset(nums, tolele - 1, sum, dparr);
+			
+			if (ans == true)
+				dparr[tolele][sum] = 1;
+			else
+				dparr[tolele][sum] = 0;
+			return ans;
+		} else {
+			boolean pick = partsubset(nums, tolele - 1, sum - nums[tolele - 1], dparr);
+			boolean notpick = partsubset(nums, tolele - 1, sum, dparr);
+			boolean ans = pick || notpick;
+			if (ans == true)
+				dparr[tolele][sum] = 1;
+			else
+				dparr[tolele][sum] = 0;
+			return ans;
+		}
+
+        
+    }
+}
