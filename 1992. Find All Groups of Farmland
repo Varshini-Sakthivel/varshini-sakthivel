@@ -1,0 +1,50 @@
+class Solution {
+       public static void dfs(int i,int j,int[][] vis,int land [][],List<Integer> farm){
+        if(i<0||j<0||j>=land[0].length||i>=land.length||vis[i][j]==1||land[i][j]==0){
+            return;
+        }
+        
+    
+            vis[i][j]=1;
+            farm.set(2,Math.max(farm.get(2),i));
+            farm.set(3,Math.max(farm.get(3),j));
+            dfs(i-1,j,vis,land,farm);
+            dfs(i+1,j,vis,land,farm);
+            dfs(i,j+1,vis,land,farm);
+            dfs(i,j-1,vis,land,farm);
+        
+
+    }
+    public int[][] findFarmland(int[][] land) {
+        List<List<Integer>> arr= new ArrayList<>();
+         int n=land.length;
+        int m=land[0].length;
+           if (land == null || land.length == 0 ) {
+            return new int[0][0];
+           }
+
+        int vis[][]=new int[n][m];
+      
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(land[i][j]==1 && vis[i][j]==0){
+                  List<Integer>farm =new ArrayList<>();
+                  farm.add(i);
+                   farm.add(j);
+                    farm.add(i);
+                     farm.add(j);
+                    dfs(i,j,vis,land,farm);
+                    arr.add(farm);
+                }
+            }
+        }
+        int[][] result = new int[arr.size()][4];
+        for (int i = 0; i < arr.size(); i++) {
+            for (int j = 0; j < 4; j++) {
+                result[i][j] = arr.get(i).get(j);
+            }
+        }
+        
+       return result; 
+    }
+}
