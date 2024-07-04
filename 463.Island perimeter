@@ -1,0 +1,44 @@
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int ans=0;
+        int val=0;
+        int peri=0;
+       for(int i=0;i<grid.length;i++){
+        for(int j=0;j<grid[0].length;j++){
+            if(grid[i][j]==1)
+             {
+                 val=checkvalues(grid,i,j,peri);
+                ans=ans+val;
+             }
+        }
+       }
+       return ans;
+    }
+    public int checkvalues(int [][]grid,int i,int j,int peri){
+        if((i+1)>=grid.length)
+          peri=peri+1;
+        else{ 
+        if(grid[i+1][j]==0)
+          peri=peri+1;
+        }
+        if((i-1)<0)
+          peri=peri+1;
+         else{ 
+         if(grid[i-1][j]==0)
+          peri=peri+1;
+         }
+         if((j-1)<0)
+         peri=peri+1;
+         else{
+         if(grid[i][j-1]==0)
+          peri=peri+1;
+         }
+         if((j+1)>=grid[0].length)
+         peri=peri+1;
+         else{
+         if(grid[i][j+1]==0)
+          peri=peri+1;   
+         }
+          return peri; 
+    }
+}
