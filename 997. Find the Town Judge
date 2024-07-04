@@ -1,0 +1,25 @@
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+      
+int[] indeg = new int[n + 1];
+        int[] outdeg = new int[n + 1];
+        
+        // Populate the indegree and outdegree arrays based on the trust relationships
+        for (int[] relation : trust) {
+            int person1 = relation[0];
+            int person2 = relation[1];
+            outdeg[person1]++;
+            indeg[person2]++;
+        }
+        
+        // Check for the town judge
+        for (int i = 1; i <= n; i++) {
+            if (indeg[i] == n - 1 && outdeg[i] == 0) {
+                return i;
+            }
+        }
+        
+        // If no judge is found, return -1
+        return -1;
+    }
+}
